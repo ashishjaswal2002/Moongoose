@@ -41,4 +41,4 @@ const playslistone  = new Playlist({
  });
 
 
- const result  = Playlist.insertMany(pla)
+ const result  = Playlist.insertMany([playlistone2, playlistone3]);
