@@ -24,4 +24,21 @@ const playslistone  = new Playlist({
   price:20000,
   active:true,
 })
-playslistone.save();
+
+ //Second
+ const playlistone2 = new Playlist({
+  id:2,
+  name:"Trampoline",
+  price:30000,
+  active:true,
+ });
+ const playlistone3 = new Playlist({
+  id:3,
+  name:" 50 Shades of Grey",
+   price:60000,
+   active:true,
+
+ });
+
+
+ const result  = Playlist.insertMany(pla)
