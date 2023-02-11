@@ -42,3 +42,10 @@ const playslistone  = new Playlist({
 
 
  const result  = Playlist.insertMany([playlistone2, playlistone3]);
+
+ const getDocument = function(){
+  const result  = Playlist.find({name:'Trampoline'});
+  console.log(result); 
+ }
+ getDocument();
+
