@@ -33,8 +33,26 @@ const fruit = new Fruit({
 ///Challenge
 const PersonSchema = new mongoose.Schema({
   name:String,
-  age:Number  
+  age:Number ,
+  favouriteFruit:fruitSchema
 })
+
+const Person = mongoose.model("Person",PersonSchema);
+
+const pineApple =  new Fruit({
+  name:"Pineapple",
+  score:9,
+  review:"Great Fruit"
+})
+pineApple.save();
+
+const Angle = new Person({
+  name:'Amy'
+  ,age:12,
+  favouriteFruit:pineApple
+})  
+Angle.save();
+
 
 const John  = mongoose.model('John',PersonSchema);
 const john = new John({
@@ -74,3 +92,18 @@ if(err){
   });
 }
 })
+
+// Fruit.deleteOne({id:"63e7baa30b7bff4cfb81791c"},function(err){
+//   if(err){
+//     console.log(err);
+//   }else{
+//     console.log("Successfully update");
+//   }
+// })
+// John.deleteMany({name:'John'},function(err){
+//   if(err){
+//     console.log(err);
+//   }else{
+//     console.log("Successfully update");
+//   }
+// })
