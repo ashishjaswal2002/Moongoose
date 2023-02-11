@@ -1,51 +1,76 @@
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/shopDB",{useNewUrlParser:true,useUnifiedTopology:true}).then(()=>console.log("Connection successfull")).catch((err)=>console.log(err));
+mongoose.set('strictQuery',true);
 
-const playlistSchema  = new mongoose.Schema({
+mongoose.connect('mongodb://localhost:27017/shopDB',{usenewUrlParser:true});
 
-  id:{
-    type:Number,
-    required:true
-  },
-  name:String,
-  price:Number,
-  active:Boolean,
-  date:{
-    type:Date,
-    default:Date.now
+const fruitSchema = new mongoose.Schema({
+  
+  name:{
+    type:String,
+    active:true
   }
+  ,rating:{
+    type:Number,
+    min:4,
+    max:10
+  },
+  review:String
+
+});
+
+const Fruit  = mongoose.model("Fruit",fruitSchema);
+
+
+const fruit = new Fruit({
+  name:'Apple',
+  rating:34,
+  review:"Pretty Solid as Rock"
+
+})
+// fruit.save();
+
+
+///Challenge
+const PersonSchema = new mongoose.Schema({
+  name:String,
+  age:Number  
 })
 
-const Playlist = new mongoose.model("Playlist",playlistSchema);
-
-const playslistone  = new Playlist({
-  id:1,
-  name:"I don't wanna live forever",
-  price:20000,
-  active:true,
+const John  = mongoose.model('John',PersonSchema);
+const john = new John({
+  name:'John',
+  age:37
 })
 
- //Second
- const playlistone2 = new Playlist({
-  id:2,
-  name:"Trampoline",
-  price:30000,
-  active:true,
- });
- const playlistone3 = new Playlist({
-  id:3,
-  name:" 50 Shades of Grey",
-   price:60000,
-   active:true,
+// john.save();
 
- });
+ const kiwi = new Fruit({
+  name:"Kiwi",
+  rating:30,
+  review:"The best fruit"
+ })
+ const Orange = new Fruit({
+  name:"Orange",
+  rating:4,
+  review:"Good for Skin"
+ })
 
+//  Fruit.insertMany([kiwi,Orange],function(err){
+//   if(err){
+//   console.log(err)}
+//   else{
+//     console.log("Successfully save all the Fruts");
+//   }
+//  })
+//to find
+Fruit.find(function(err,fruits){
+if(err){
+  console.log(err);
 
- const result  = Playlist.insertMany([playlistone2, playlistone3]);
+}else{
 
- const getDocument = function(){
-  const result  = Playlist.find({name:'Trampoline'});
-  console.log(result); 
- }
- getDocument();
-
+  fruits.forEach(function(fruit){
+    console.log(fruit.name)
+  });
+}
+})
