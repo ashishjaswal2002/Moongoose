@@ -44,7 +44,7 @@ const pineApple =  new Fruit({
   score:9,
   review:"Great Fruit"
 })
-pineApple.save();
+// pineApple.save();
 
 const Angle = new Person({
   name:'Amy'
@@ -107,3 +107,20 @@ if(err){
 //     console.log("Successfully update");
 //   }
 // })
+
+const findMethod = async ()=>{
+
+        try{
+         const result = await products.find({price:0.8}).select({name:1})
+         console.log(result);
+        }catch(err){
+    if(err){
+      console.log(err);
+
+    }else{
+      console.log("Running Successfull"); 
+    }
+        }
+        
+}
+findMethod();
